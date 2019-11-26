@@ -1,0 +1,14 @@
+{
+  "name": "node-mp",
+  "version": "1.0.0",
+  "description": "nodeJS mentoring program",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oleksandr Kukla",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
