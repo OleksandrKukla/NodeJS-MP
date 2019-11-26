@@ -4,11 +4,15 @@
   "description": "nodeJS mentoring program",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "task1": "nodemon ./task1.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint ./task1.js"
   },
   "author": "Oleksandr Kukla",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^6.7.1",
+    "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.1"
   }
 }
