@@ -1,4 +1,4 @@
-const ReadLine = require('readline');
+import ReadLine from 'readline';
 
 process.stdin.setEncoding('utf8');
 
