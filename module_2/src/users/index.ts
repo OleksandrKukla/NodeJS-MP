@@ -1,9 +1,11 @@
 import Users from './users';
 import HttpStatus from 'http-status-codes';
 import mockedUsers from './users.mock';
+import createValidator from './validator';
 
 export default (app) => {
     const users = new Users(mockedUsers);
+    const validator = createValidator();
 
     app.get('/users/:id', (req, res) => {
         const user = users.getUser(req.params.id);
@@ -12,14 +14,14 @@ export default (app) => {
         res.status(status).json(user);
     });
 
-    app.post('/users/', (req, res) => {
+    app.post('/users/', validator, (req, res) => {
         const user = users.addUser(req.body);
         const status = user ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
 
         res.status(status).json(user);
     });
 
-    app.patch('/users/:id', (req, res) => {
+    app.put('/users/:id', validator, (req, res) => {
         const user = users.updateUser(req.params.id, req.body);
         const status = user ? HttpStatus.OK : HttpStatus.NOT_FOUND;
 
