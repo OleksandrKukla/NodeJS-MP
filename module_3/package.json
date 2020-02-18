@@ -1,0 +1,43 @@
+{
+  "name": "module_2",
+  "version": "1.0.0",
+  "description": "nodeJS mentoring program",
+  "main": "index.js",
+  "scripts": {
+    "start": "PORT=3000 babel-node --inspect=5858 ./src/app.js",
+    "start:watch": "nodemon",
+    "init": "babel-node ./src/init.js",
+    "eslint": "eslint ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "npm start"
+  },
+  "author": "Oleksandr Kukla",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "eslint": "^6.7.1",
+    "eslint-config-google": "^0.14.0",
+    "nodemon": "^2.0.1"
+  },
+  "dependencies": {
+    "@hapi/joi": "^16.1.8",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-joi-validation": "^4.0.3",
+    "http-status-codes": "^1.4.0",
+    "pg": "^7.18.1",
+    "sequelize": "^5.21.4"
+  }
+}
