@@ -7,18 +7,17 @@ const init = (db) => {
 
     const createTable = db.query(`CREATE TABLE ${ config.tableName } (
         ${ config.primaryKey } SERIAL PRIMARY KEY,
-        login VARCHAR(255) NOT NULL,
-        password VARCHAR(255),
-        age INT
+        name VARCHAR(255) NOT NULL,
+        permissions TEXT[]
     );`);
 
-    const getUsersValues = sampleData
-        .map(user => `('${ user.login }', '${ user.password }', ${ user.age })`)
+    const getGroupValues = sampleData
+        .map(group => `('${ group.name }', '${ group.permissions }')`)
         .join(',');
 
     const insertData = db.query(`INSERT INTO ${ config.tableName } 
-        (login, password, age) 
-        VALUES ${ getUsersValues }
+        (name, permissions) 
+        VALUES ${ getGroupValues }
     ;`);
 
     return Promise.allSettled([

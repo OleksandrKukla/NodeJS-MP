@@ -18,21 +18,21 @@ export default (app, connection) => {
         const user = await service.add(req.body);
         const status = user ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
 
-        res.status(status).json(user);
+        res.status(status).end();
     });
 
     app.put('/users/:id', validator, async (req, res) => {
         const user = await service.update(req.params.id, req.body);
         const status = user ? HttpStatus.OK : HttpStatus.NOT_FOUND;
 
-        res.status(status).json(user);
+        res.status(status).end();
     });
 
     app.delete('/users/:id', async (req, res) => {
         const user = await service.delete(req.params.id);
         const status = user ? HttpStatus.OK : HttpStatus.NOT_FOUND;
 
-        res.status(status).json(user);
+        res.status(status).end();
     });
 
     app.get('/suggested/', async (req, res) => {

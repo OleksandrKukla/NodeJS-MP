@@ -69,4 +69,4 @@ export default [
     "password": "adhn13827y",
     "age": 16
   }
-]
+];

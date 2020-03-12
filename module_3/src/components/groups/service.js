@@ -10,19 +10,15 @@ class Service {
                 autoIncrement: true,
                 primaryKey: true,
             },
-            login: {
+            name: {
                 type: Sequelize.STRING,
                 allowNull: false
             },
-            password: {
-                type: Sequelize.STRING,
+            permissions: {
+                type: Sequelize.ARRAY(Sequelize.TEXT),
                 allowNull: true,
-                defaultValue: ''
-            },
-            age: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
+                defaultValue: []
+            }
         }, {
             timestamps: false
         });
@@ -40,7 +36,8 @@ class Service {
         return this.model.destroy({
             where: {
                 [this.config.primaryKey]: id
-            }
+            },
+            force: true
         });
     }
 
@@ -52,15 +49,8 @@ class Service {
         });
     }
 
-    getAutoSuggested (loginSubstring, limit) {
-        return this.model.findAll({
-            where: {
-                login: {
-                    [Sequelize.Op.substring]: loginSubstring
-                }
-            },
-            limit
-        })
+    getAll () {
+        return this.model.findAll()
     }
 }
 
