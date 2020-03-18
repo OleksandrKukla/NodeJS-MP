@@ -10,9 +10,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-logger(app);
+const loggerInstance = logger(app);
 
-const connection = new Sequelize(dbConfig.connectionUrl);
+const connection = new Sequelize(dbConfig.connectionUrl, {
+    logging: message => loggerInstance.info(message)
+});
 
 initializeComponents(app, connection);
 
