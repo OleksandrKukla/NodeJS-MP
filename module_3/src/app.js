@@ -3,14 +3,18 @@ import Sequelize from 'sequelize';
 import bodyParser from 'body-parser';
 import { initialize as initializeComponents } from './components';
 import dbConfig from './config/db.config';
+import logger from './logger';
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+const loggerInstance = logger(app);
 
-const connection = new Sequelize(dbConfig.connectionUrl);
+const connection = new Sequelize(dbConfig.connectionUrl, {
+    logging: message => loggerInstance.info(message)
+});
 
 initializeComponents(app, connection);
 
