@@ -2,9 +2,11 @@ import Service from './service';
 import config from './config';
 import HttpStatus from 'http-status-codes';
 import createValidator from './validator';
+import createModel from './model'
 
 export default (app, connection) => {
-    const service = new Service(connection, config);
+    const model = createModel(connection, config);
+    const service = new Service(model, config);
     const validator = createValidator();
 
     app.get('/groups/:id', async (req, res) => {
