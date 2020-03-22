@@ -1,12 +1,6 @@
-import Service from './service';
-import config from './config';
 import HttpStatus from 'http-status-codes';
-import createValidator from './validator';
-import authorization from '../authorization/middleware';
 
-export default (app, connection) => {
-    const service = new Service(connection, config);
-    const validator = createValidator();
+export default (app, service, validator, authorization) => {
 
     app.get('/users/:id', authorization, async (req, res) => {
         const user = await service.get(req.params.id);

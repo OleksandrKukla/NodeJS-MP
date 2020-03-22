@@ -1,21 +1,26 @@
-import { controller as authorizationController } from './authorization';
-import * as users from './users';
-import { controller as groupsController, config as groupsConfig } from './groups';
-import { controller as groupUsersController } from './groupUsers';
+import {
+    initController as initAuthorizationController,
+    middleware as authorizationValidator
+} from './authorization';
+
+import {
+    initController as initUsersController,
+    config as usersConfig
+} from './users';
+
+import {
+    initController as initGroupsController,
+    config as groupsConfig
+} from './groups';
+
+import { initController as initGroupUsersController } from './groupUsers';
 
 const initialize = (app, connection) => {
 
-    authorizationController(app, connection, users);
-    users.controller(app, connection);
-    groupsController(app, connection);
-    groupUsersController(app, connection, {
-        usersTableName: users.config.tableName,
-        usersPK: users.config.primaryKey,
-        groupsTableName: groupsConfig.tableName,
-        groupsPK: groupsConfig.primaryKey
-    });
-
-    /* ...all imported components list init */
+    const { service } = initUsersController(app, connection, authorizationValidator);
+    initAuthorizationController(app, service);
+    initGroupsController(app, connection, authorizationValidator);
+    initGroupUsersController(app, connection, usersConfig, groupsConfig, authorizationValidator);
 };
 
 export {
