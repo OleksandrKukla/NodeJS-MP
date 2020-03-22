@@ -2,30 +2,9 @@ import Sequelize from 'sequelize';
 
 class Service {
 
-    constructor (connection, config) {
+    constructor (model, config) {
         this.config = config;
-        this.model = connection.define(config.tableName, {
-            [config.primaryKey]: {
-                type: Sequelize.INTEGER,
-                autoIncrement: true,
-                primaryKey: true,
-            },
-            login: {
-                type: Sequelize.STRING,
-                allowNull: false
-            },
-            password: {
-                type: Sequelize.STRING,
-                allowNull: true,
-                defaultValue: ''
-            },
-            age: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-            },
-        }, {
-            timestamps: false
-        });
+        this.model = model;
     }
 
     get (id) {
@@ -49,6 +28,12 @@ class Service {
             where: {
                 [this.config.primaryKey]: id
             }
+        });
+    }
+
+    getByLogin (login) {
+        return this.model.findOne({
+            where: { login }
         });
     }
 
