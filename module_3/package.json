@@ -4,11 +4,12 @@
   "description": "nodeJS mentoring program",
   "main": "index.js",
   "scripts": {
-    "start": "PORT=3000 babel-node --inspect=5858 ./src/app.js",
+    "start": "PORT=3000 babel-node --inspect=5858 ./src/index.js",
     "start:watch": "nodemon",
     "init": "babel-node ./src/init.js",
     "eslint": "eslint ./src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:watch": "NODE_ENV=test jest --watch",
+    "test": "NODE_ENV=test jest"
   },
   "nodemonConfig": {
     "ignore": [
@@ -20,6 +21,11 @@
     ],
     "exec": "npm start"
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "author": "Oleksandr Kukla",
   "license": "ISC",
   "devDependencies": {
@@ -27,14 +33,19 @@
     "@babel/core": "^7.7.4",
     "@babel/node": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
+    "babel-jest": "^25.1.0",
     "eslint": "^6.7.1",
     "eslint-config-google": "^0.14.0",
-    "nodemon": "^2.0.1"
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.1",
+    "sequelize-mock": "^0.10.2",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "@hapi/joi": "^16.1.8",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-joi-validation": "^4.0.3",
     "http-status-codes": "^1.4.0",
